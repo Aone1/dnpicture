@@ -50,7 +50,7 @@ export default {
                 {title:"最新"},
                 {title:"专辑"}
             ],
-            current:0
+            current:3
         }
     },
     methods:{
