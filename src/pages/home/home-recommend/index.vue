@@ -3,9 +3,9 @@
     scroll-y=true v-if="recommends.length>0">
         <!-- 推荐开始 -->
         <view class="recommend_wrap">
-            <view class="recommend_item" v-for="item in recommends" :key="item.id">
+            <navigator :url="`/pages/album/index?id=${item.target}`" class="recommend_item" v-for="item in recommends" :key="item.id">
                 <image mode="widthFix" :src="item.thumb"></image>
-            </view>
+            </navigator>
         </view>
         <!-- 推荐结束 -->
 
@@ -74,6 +74,10 @@ export default {
                 //判断还有没有下一页
                 if(result.res.vertical.length==0){
                     this.hasMore=false;
+                    uni.showToast({
+                        title:"我是有底线的！",
+                        icon:"none"
+                    });
                     return;
                 }
 

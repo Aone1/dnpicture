@@ -18,9 +18,9 @@
 
         <!-- 列表开始 -->
         <view class="album_list">
-            <view class="album_item" v-for="item in album" :key="item.id">
+            <navigator class="album_item" :url="`/pages/album/index?id=${item.id}`" v-for="item in album" :key="item.id">
                 <view class="album_img">
-                    <image :src="item.cover"></image>
+                    <image mode="aspectFill" :src="item.cover"></image>
                 </view>
                 <view class="album_info">
                     <view class="album_name">{{item.name}}</view>
@@ -29,7 +29,7 @@
                         <view class="album_attention">+关注</view>
                     </view>
                 </view>
-            </view>
+            </navigator>
         </view>
         <!-- 列表结束 -->
     </scroll-view>
@@ -62,6 +62,10 @@ export default {
                 //判断还有没有下一页
                 if(result.res.album.length==0){
                     this.hasMore=false;
+                    uni.showToast({
+                        title:"我是有底线的！",
+                        icon:"none"
+                    });
                     return;
                 }
 
