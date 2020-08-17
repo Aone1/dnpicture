@@ -35,7 +35,7 @@ export default {
             let direction="";
 
             //先判断用户滑动的距离是否合法，合法：判断滑动的方向 注意：距离要加上绝对值
-            if(Math.abs(endX-this.startX)>10){
+            if(Math.abs(endX-this.startX)>10&&Math.abs(endY-this.startY)<10){
                 //滑动方向
                 direction=endX-this.startX>0?"right":"left";
             }else{
@@ -43,7 +43,6 @@ export default {
             }
 
             //用户做了合法的滑动操作
-            //console.log(direction);
             this.$emit("swiperAction",{direction});
         }
     }

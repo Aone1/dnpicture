@@ -124,6 +124,12 @@
                 </view>
             </view>
         </view>
+
+        <!-- 下载 开始 -->
+        <view class="download">
+            <view class="download_btn" @click="handleDownload">下载图片</view>
+        </view>
+        <!-- 下载 结束 -->
     </view>
 </template>
 
@@ -205,6 +211,24 @@ export default {
                     icon:"none"
                 });
             }
+        },
+        //点击下载图片
+        async handleDownload(){
+            uni.showLoading({
+                title:"下载中"
+            });
+
+            //将远程文件下载到小程序的内存中 tempFilePath
+            const result1=await uni.downloadFile({url:this.imgDetail.img});
+            const {tempFilePath}=result1[1];
+
+            //将小程序内存中的临时文件下载到本地（手机相册）
+            const result2=await uni.saveImageToPhotosAlbum({filePath:tempFilePath});
+
+            uni.hideLoading();
+            uni.showToast({
+                title:"下载成功"
+            });
         }
     }
 }
@@ -387,6 +411,25 @@ export default {
 .new{
     .iconpinglun{
         color: aqua!important;
+    }
+}
+
+//下载
+.download{
+    height: 120rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .download_btn{
+        width: 90%;
+        height: 80%;
+        background-color: $color;
+        color: #fff;
+        font-size: 50rpx;
+        font-weight: 600;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }
 </style>
