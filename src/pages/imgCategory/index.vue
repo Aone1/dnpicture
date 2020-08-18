@@ -10,8 +10,10 @@
             </view>
             
             <scroll-view @scrolltolower="handleToLower" enable-flex scroll-y=true class="cate_tab_content">
-                <view class="cate_item" v-for="item in vertical" :key="item.id">
-                    <image :src="item.thumb" mode="widthFix"></image>
+                <view class="cate_item" v-for="(item,index) in vertical" :key="item.id">
+                    <go-detail :list="vertical" :index="index">
+                        <image :src="item.thumb" mode="widthFix"></image>
+                    </go-detail>
                 </view>
             </scroll-view>
         </view>
@@ -19,10 +21,11 @@
 </template>
 
 <script>
+import goDetail from "@/components/goDetail"
 //引入分段器
 import {uniSegmentedControl} from '@dcloudio/uni-ui'
 export default {
-    components:{uniSegmentedControl},
+    components:{goDetail,uniSegmentedControl},
     data() {
         return {
             items:[
